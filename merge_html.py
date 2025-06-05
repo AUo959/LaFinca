@@ -23,12 +23,3 @@ for file in files[1:]:
 
 # Create merged HTML
 merged_html = "<!DOCTYPE html>\n<html>\n"
-merged_html += str(head) + "\n<body>\n"
-for body in bodies:
-    merged_html += "".join(str(child) for child in body.contents)
-merged_html += "\n</body>\n</html>"
-
-with open("merged_index.html", "w", encoding="utf-8") as f:
-    f.write(merged_html)
-
-print("Merged HTML written to merged_index.html")
