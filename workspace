@@ -1,0 +1,44 @@
+#!/bin/bash
+
+echo "🔍 Checking LaFinca Project Status..."
+
+# 1. Verify critical files exist
+echo "📦 Verifying project structure..."
+required_files=("index.html" "style.css" "script.js" "README.md" ".nojekyll")
+for file in "${required_files[@]}"; do
+    if [ -f "$file" ]; then
+        echo "✅ $file found"
+    else
+        echo "❌ $file missing"
+    fi
+done
+
+# 2. Check scripts and video folders
+if [ -d "scripts" ]; then
+    echo "✅ scripts/ folder exists"
+else
+    echo "❌ scripts/ folder missing"
+fi
+
+if [ -d "video" ]; then
+    echo "✅ video/ folder exists"
+else
+    echo "❌ video/ folder missing"
+fi
+
+# 3. Run basic HTML validation
+echo "🔧 Validating index.html..."
+if grep -q "<!DOCTYPE html>" index.html; then
+    echo "✅ HTML structure looks good"
+else
+    echo "⚠️ Missing DOCTYPE in HTML"
+fi
+
+# 4. Git sync status
+echo "🔄 Checking Git sync..."
+git status
+
+# 5. Optional: local preview
+echo "🌐 Previewing locally at http://localhost:8000"
+python3 -m http.server 8000
+
